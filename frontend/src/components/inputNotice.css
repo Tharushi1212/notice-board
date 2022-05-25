@@ -1,0 +1,19 @@
+.fieldset{
+    background-color: black;
+    border-radius: 2%;
+}
+
+.card-header{
+    background-color:rgb(196, 231, 80)
+}
+.card{
+background-color: rgb(158, 230, 82);
+width: fit-content;
+}
+
+.hr{
+    color: black;
+}
+
+:root {
+    --bs-blue: #0d6efd;}
