@@ -45,11 +45,7 @@ const inputNotes = async(e) =>{
               
         </div>  
         <hr/>
-        <div>
-          
-            <ListNotice/>
-            
-        </div>
+       
 
      </div>
    </Fragment>
