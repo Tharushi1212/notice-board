@@ -4,8 +4,10 @@ import EditNotice from "./editNotice";
 
 const ListNotice = () => {
   const [notices, setNotices] = useState([]);
-  const [headline, setHeadline] = useState(notices.headline);
-  const [description, setDescription] = useState(notices.description);
+  //const [headline, setHeadline] = useState(notices.headline);
+  const [description, setDescription] = useState("");
+  const [modalOpen, setModalOpen] = useState(false);
+  const [noticeID, SetnoticeID] = useState(-2);
 
   //retrive notices
   const getNotice = async () => {
@@ -44,22 +46,23 @@ const ListNotice = () => {
     e.preventDefault();
     try {
       const body = { description };
+      console.log(body)
       const response = await fetch(
-        `http://localhost:5000/notices/${notices.notice_id}`,
+        `http://localhost:5000/notices/${noticeID}`,
         {
           method: "PUT",
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify(body),
         }
       );
-console.log(body)
+
       window.location = "/";
     } catch (err) {
       console.error(err.message);
     }
   };
 
-  const [a, setA] = useState(false);
+  
 
   const openModal = () => {};
 
@@ -76,7 +79,8 @@ console.log(body)
               <div className="flex flex-row ">
                 <button
                   className="btn btn-warning mr-2"
-                  onClick={() => setA(note.description)}
+                  onClick={() => {setModalOpen(true); setDescription(note.description); SetnoticeID(note.notice_id)}}
+                  
                 >
                   Edit
                 </button>
@@ -92,7 +96,7 @@ console.log(body)
         </Draggable>
       ))}
 
-      {a && (
+      {modalOpen && (
         <>
           <div
             className=""
@@ -111,7 +115,7 @@ console.log(body)
                   ></button>
                 </div>
                 <div className="modal-body">
-                  <input value={a} onChange={e=>setA(e.target.value)}/>
+                  <input value={description} onChange={e=>setDescription(e.target.value)}/>
                 </div>
                 <div className="modal-footer">
                   <button
@@ -119,7 +123,7 @@ console.log(body)
                     className="btn btn-secondary"
                     data-bs-dismiss="modal"
                     onClick={()=>{
-                        setA(false)
+                        setModalOpen(false)
                     }}
                   >
                     Close

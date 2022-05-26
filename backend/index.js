@@ -58,6 +58,8 @@ app.delete("/notices/:id", async (req, res) => {
 
 //update a notice
 app.put("/notices/:id", async (req, res) => {
+  console.log(req.body)
+    console.log(req.params.id)
     try {
       const { id } = req.params;
       const { headline,description } = req.body;
